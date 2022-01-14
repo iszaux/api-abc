@@ -9,14 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DatumDto {
 
     @JsonProperty("_website_urls")
-    private List<String> websiteUrls;   //urls
-    private DescriptionDto headlines;   //titulo de la noticia
+    private List<String> websiteUrls; // urls
+    private DescriptionDto headlines; // titulo de la noticia
     @JsonProperty("promo_items")
-    private PromoItemsDto promoItems;   //foto
+    private PromoItemsDto promoItems; // foto
     @JsonProperty("publish_date")
-    private String publishDate;         //fecha y hora de la noticia
-    private DescriptionDto subheadlines;//resumen de la noticia
-
+    private String publishDate; // fecha y hora de la noticia
+    private DescriptionDto subheadlines;// resumen de la noticia
 
     public List<String> getWebsiteUrls() {
         return websiteUrls;
@@ -25,7 +24,6 @@ public class DatumDto {
     public void setWebsiteUrls(List<String> value) {
         this.websiteUrls = value;
     }
-
 
     public DescriptionDto getHeadlines() {
         return headlines;
@@ -58,6 +56,5 @@ public class DatumDto {
     public void setSubheadlines(DescriptionDto value) {
         this.subheadlines = value;
     }
-
 
 }

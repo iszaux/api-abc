@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseDto {
     private List<DatumDto> data;
@@ -20,7 +21,5 @@ public class ResponseDto {
     public String toString() {
         return "ResponseDto [data=" + data + "]";
     }
-
-    
 
 }

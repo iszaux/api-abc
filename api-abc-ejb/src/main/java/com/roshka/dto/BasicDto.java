@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class BasicDto {
     private String url;
 
-
     public String getURL() {
         return url;
     }

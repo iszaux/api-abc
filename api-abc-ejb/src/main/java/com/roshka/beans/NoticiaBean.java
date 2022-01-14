@@ -51,7 +51,7 @@ public class NoticiaBean {
         Element listaNoticiasHtml = doc.getElementById("fusion-metadata");
         if (listaNoticiasHtml == null)
             throw new ABCApiException(ErrorMessage.INTERNAL_ERROR);
-
+        
         // se obtiene un string con el texto donde se encuentran las noticias
         String text = listaNoticiasHtml.data();
         int first = text.indexOf("globalContent="); // inicio del json

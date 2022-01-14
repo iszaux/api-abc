@@ -5,14 +5,17 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.roshka.beans.NoticiaBean;
 import com.roshka.dto.NoticiaDto;
 import com.roshka.dto.ResponseErrorDto;
+import com.roshka.dto.ResponseListaNoticiasDto;
 import com.roshka.enums.ErrorMessage;
 import com.roshka.utils.ABCApiException;
 
@@ -23,13 +26,14 @@ public class NoticiaRest {
     NoticiaBean noticiaBean;
 
     @GET
-    @Produces("application/json")
-    public Response getNoticias(@QueryParam("q") String q) throws ABCApiException, IOException {
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_HTML })
+    public Response getNoticias(@QueryParam("q") String q, @HeaderParam("Accept") String headerParam) throws ABCApiException, IOException {
 
         try {
-
+            ResponseListaNoticiasDto responseDto = new ResponseListaNoticiasDto();
             List<NoticiaDto> listaNoticias = noticiaBean.getNoticias(q);
-            return Response.status(200).entity(listaNoticias).build();
+            responseDto.setLista(listaNoticias);
+            return Response.status(200).entity(responseDto).build();
 
         } catch (ABCApiException e) {
             ResponseErrorDto responseError = new ResponseErrorDto();

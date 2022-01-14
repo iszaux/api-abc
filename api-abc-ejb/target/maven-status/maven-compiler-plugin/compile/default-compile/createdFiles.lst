@@ -1,6 +1,7 @@
 com\roshka\dto\NoticiaDto.class
 com\roshka\dto\PromoItemsDto.class
 com\roshka\dto\BasicDto.class
+com\roshka\dto\ResponseListaNoticiasDto.class
 com\roshka\dto\DescriptionDto.class
 com\roshka\dto\DatumDto.class
 com\roshka\enums\ErrorMessage.class

@@ -21,6 +21,10 @@ import com.roshka.dtos.ResponseListaNoticiasDto;
 import com.roshka.enums.ErrorMessage;
 import com.roshka.utils.ABCApiException;
 
+import io.swagger.v3.oas.annotations.Operation;
+
+
+
 @Path("/consulta")
 public class NoticiaRest {
 
@@ -28,9 +32,11 @@ public class NoticiaRest {
     NoticiaBean noticiaBean;
 
     @GET
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_HTML })
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
+    @Operation(summary = "Recupera una lista de noticias de ABC de acuerdo a un filtro de busqueda")
     public Response getNoticias(@QueryParam("q") String qParam, @HeaderParam("Accept") String headerParam,
-            @DefaultValue("false") @QueryParam("f") Boolean fParam, @DefaultValue("") @HeaderParam("api-key") String apikeyHeader) throws ABCApiException, IOException {
+            @DefaultValue("false") @QueryParam("f") Boolean fParam,
+            @DefaultValue("") @HeaderParam("api-key") String apikeyHeader) throws ABCApiException, IOException {
 
         try {
 

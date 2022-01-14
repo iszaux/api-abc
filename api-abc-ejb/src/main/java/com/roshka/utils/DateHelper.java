@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 public class DateHelper {
     private static final String ISO8601_FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
-    private static final String INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ssz";
+    private static final String INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
     public static String getDateISO8601(Date fecha) {
         SimpleDateFormat sDFormat = new SimpleDateFormat(ISO8601_FORMAT_DATE);

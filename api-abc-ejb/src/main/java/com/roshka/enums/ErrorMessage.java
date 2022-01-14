@@ -2,7 +2,7 @@ package com.roshka.enums;
 
 public enum ErrorMessage {
 
-    NOT_FOUND(404, "g267", "No se encuentran noticias para el texto: {TEXTO DE BÚSQUEDA}"),
+    NOT_FOUND(404, "g267", "No se encuentran noticias para el texto:"),
     INVALID_PARAMS(400, "g268", "Parámetros inválidos"),
     INTERNAL_ERROR(500, "g100", "Error interno del servidor"),
     UNAUTHORIZED(403, "g103", "No Autorizado");

@@ -1,12 +1,10 @@
 com\roshka\dto\NoticiaDto.class
-com\roshka\beans\DataNodes.class
 com\roshka\dto\PromoItemsDto.class
 com\roshka\dto\BasicDto.class
 com\roshka\dto\DescriptionDto.class
 com\roshka\dto\DatumDto.class
 com\roshka\enums\ErrorMessage.class
 com\roshka\beans\NoticiaBean$1.class
-com\roshka\dto\ResponseAPIDto.class
 com\roshka\beans\NoticiaBean$2.class
 com\roshka\utils\ABCApiException.class
 com\roshka\utils\DateHelper.class

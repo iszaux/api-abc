@@ -30,6 +30,12 @@ public class ABCApiException extends Exception {
         this.status = message.getStatus();
     }
 
+    public ABCApiException(ErrorMessage message, String infExtra) {
+        this.descripcion = message.getError() + " " + infExtra;
+        this.codigo = message.getCodigo();
+        this.status = message.getStatus();
+    }
+
     public String getDescripcion() {
         return descripcion;
     }

@@ -5,7 +5,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import java.util.List;
 
@@ -23,7 +22,6 @@ import com.roshka.dto.NoticiaDto;
 import com.roshka.dto.ResponseDto;
 import com.roshka.enums.ErrorMessage;
 import com.roshka.utils.ABCApiException;
-import com.roshka.utils.DateHelper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,16 +55,16 @@ public class NoticiaBean {
         // se obtiene un string con el texto donde se encuentran las noticias
         String text = listaNoticiasHtml.data();
         int first = text.indexOf("globalContent="); // inicio del json
-        System.out.println(" First: " + first);
         text = text.substring(first);
         first = text.indexOf("{");
         int last = text.indexOf(";"); // ultimo caracter del json
-        System.out.println(" Last: " + last);
         text = text.substring(first, last); // se obtiene el json en forma de string
 
         ObjectMapper om = new ObjectMapper();
         // se convierte el string en objeto
         ResponseDto responseJson = om.readValue(text, ResponseDto.class);
+        if (responseJson.getData().isEmpty())
+            throw new ABCApiException(ErrorMessage.NOT_FOUND, param);
 
         return validateList(responseJson);
     }
@@ -79,16 +77,18 @@ public class NoticiaBean {
      * @return retorna la lista de Noticias en el formato requerido
      */
     public List<NoticiaDto> validateList(ResponseDto responseDto) throws ABCApiException {
-        if (responseDto.getData().isEmpty())
-            throw new ABCApiException(ErrorMessage.NOT_FOUND);
 
         List<NoticiaDto> listaNoticias = new ArrayList<>();
         for (DatumDto dto : responseDto.getData()) {
             NoticiaDto noticia = new NoticiaDto();
-            noticia.setEnlace(pathPrincipal + "" + dto.getWebsiteUrls().get(0));
+            List<String> urlNoticias = dto.getWebsiteUrls();
+            if (!urlNoticias.isEmpty())
+                noticia.setEnlace(pathPrincipal + "" + urlNoticias.get(0));
+            else
+                noticia.setEnlace("No hay URL disponible");
             noticia.setTitulo(dto.getHeadlines().getBasic());
             noticia.setResumen(dto.getSubheadlines().getBasic());
-            Date fecha = DateHelper.stringToDate(dto.getPublishDate());
+            // Date fecha = DateHelper.stringToDate(dto.getPublishDate());
             noticia.setFecha(dto.getPublishDate());
             noticia.setEnlaceFoto(dto.getPromoItems().getBasic().getURL());
 

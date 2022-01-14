@@ -12,7 +12,8 @@ import javax.ws.rs.core.Response;
 
 import com.roshka.beans.NoticiaBean;
 import com.roshka.dto.NoticiaDto;
-import com.roshka.dto.ResponseAPIDto;
+import com.roshka.dto.ResponseErrorDto;
+import com.roshka.enums.ErrorMessage;
 import com.roshka.utils.ABCApiException;
 
 @Path("/consulta")
@@ -23,25 +24,28 @@ public class NoticiaRest {
 
     @GET
     @Produces("application/json")
-    public ResponseAPIDto getNoticias(@QueryParam("q") String q) throws ABCApiException, IOException {
-
-        ResponseAPIDto response = new ResponseAPIDto();
+    public Response getNoticias(@QueryParam("q") String q) throws ABCApiException, IOException {
 
         try {
 
             List<NoticiaDto> listaNoticias = noticiaBean.getNoticias(q);
-            response.setLista(listaNoticias);
+            return Response.status(200).entity(listaNoticias).build();
 
         } catch (ABCApiException e) {
+            ResponseErrorDto responseError = new ResponseErrorDto();
+            responseError.setCodigo(e.getCodigo());
+            responseError.setError(e.getDescripcion());
 
-            response.setCodigo(e.getCodigo());
-            response.setError(e.getDescripcion());
-            Response.status(e.getStatus());
+            return Response.status(e.getStatus()).entity(responseError).build();
+        } catch (Exception e) {
+            ResponseErrorDto responseError = new ResponseErrorDto();
+            responseError.setCodigo(ErrorMessage.INTERNAL_ERROR.getCodigo());
+            responseError.setError(ErrorMessage.INTERNAL_ERROR.getError());
 
-            return response;
+            return Response.status(ErrorMessage.INTERNAL_ERROR.getStatus())
+                    .entity(responseError).build();
         }
 
-        return response;
     }
 
 }

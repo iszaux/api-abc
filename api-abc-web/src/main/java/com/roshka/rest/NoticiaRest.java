@@ -14,16 +14,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.roshka.beans.NoticiaBean;
-import com.roshka.dtos.NoticiaDto;
-import com.roshka.dtos.ResponseErrorDto;
-import com.roshka.dtos.ResponseListaNoticiasDto;
+import com.roshka.bean.NoticiaBean;
+import com.roshka.dto.NoticiaDto;
+import com.roshka.dto.ResponseErrorDto;
+import com.roshka.dto.ResponseListaNoticiasDto;
 import com.roshka.enums.ErrorMessage;
-import com.roshka.utils.ABCApiException;
+import com.roshka.util.ABCApiException;
 
 import io.swagger.v3.oas.annotations.Operation;
-
-
 
 @Path("/consulta")
 public class NoticiaRest {
